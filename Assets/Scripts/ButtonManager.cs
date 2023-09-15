@@ -7,13 +7,20 @@ using UnityEngine.UI;
 
 public class ButtonBehavior : MonoBehaviour
 {
-	float multiplier = 1;
-	Button btn;
+	public bool HasCombo;
+	public int MaxComboCount = 3;
+
+	Button button;
 
 	void Start() 
 	{
-		btn = GetComponent<Button>();
-		string text = GetComponentInChildren<TextMeshProUGUI>().text;
-		Debug.Log(text);
+		button = GetComponent<Button>();
+		Debug.Log("Init " + GetComponentInChildren<TextMeshProUGUI>().text);
+	}
+
+
+	public void OnClicked()
+	{
+
 	}
 }

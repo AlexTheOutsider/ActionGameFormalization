@@ -435,6 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556371908}
+  - component: {fileID: 556371909}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -457,6 +458,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556371909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556371907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d20204aebfdd514fb4c922e606ab06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    trackSize: {x: 400, y: 450}
+    attackSpeed: 10
+  actionPhaseList:
+  - phase: 0
+    rectTransform: {fileID: 488927388}
+    duration: 0.1
+  - phase: 1
+    rectTransform: {fileID: 909764330}
+    duration: 0.3
+  - phase: 2
+    rectTransform: {fileID: 1937114865}
+    duration: 0.2
+  - phase: 3
+    rectTransform: {fileID: 600387854}
+    duration: 0.3
+  - phase: 4
+    rectTransform: {fileID: 1856054755}
+    duration: 0.1
 --- !u!1 &588593252
 GameObject:
   m_ObjectHideFlags: 0
