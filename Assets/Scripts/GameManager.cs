@@ -3,12 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using DG.Tweening;
+using UnityEngine.UIElements;
 
 [Serializable]
 public struct GlobalSettings
 {
 	public Vector2 trackSize;
 	public float attackSpeed;
+
+	public InputAction attackAction;
+	public InputAction skillAction;
+	public InputAction ultimateAction;
+	public InputAction dodgeAction;
 }
 
 public enum ActionPhase
@@ -33,14 +41,26 @@ public class GameManager : MonoBehaviour
 {
 	public GlobalSettings settings;
 	public ActionPhaseStruct[] actionPhaseList = new ActionPhaseStruct[(int)ActionPhase.ENUM_COUNT];
+	
 
-	GameObject track;
+	GameObject track, playerBeat;
+
+	public void OnEnable()
+	{
+		settings.attackAction.Enable();
+	}
+
+	public void OnDisable()
+	{
+		settings.attackAction.Disable();
+	}
 
 	void Start()
 	{
 		Debug.Log("Game Started");
 
 		track = GameObject.Find("Track");
+		playerBeat = GameObject.Find("PlayerBeat");
 		track.transform.GetComponent<RectTransform>().sizeDelta = settings.trackSize;
 		foreach (var actionPhase in actionPhaseList)
 		{
@@ -57,6 +77,31 @@ public class GameManager : MonoBehaviour
 				default:
 					break;
 			}
+		}
+
+		settings.attackAction.performed += ctx => { OnAttack(ctx); };
+	}
+
+	void Update()
+	{
+
+	}
+
+	void OnAttack(InputAction.CallbackContext ctx)
+	{
+		Debug.Log("Attack Pressed");
+		playerBeat.transform.DOMove(playerBeat.transform.position + new Vector3(0, 440, 0), 2);
+		//playerBeat.transform.DOMoveY(playerBeat.transform.position.y + 440, 2);
+		//playerBeat.transform.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 445), 2);
+		//StartCoroutine("Move");
+	}
+
+	IEnumerator Move()
+	{
+		for (; ; )
+		{
+			playerBeat.transform.GetComponent<RectTransform>().localPosition += new Vector3(0, 1, 0);
+			yield return new WaitForSeconds(.1f);
 		}
 	}
 }
